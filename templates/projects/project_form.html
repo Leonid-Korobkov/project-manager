@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{% if form.instance.pk %}
+Редактирование проекта | {{ block.super }}
+{% else %}
+Создание проекта | {{ block.super }}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="mb-0">
+          {% if form.instance.pk %}
+          <i class="bi bi-pencil me-2"></i>Редактирование проекта
+          {% else %}
+          <i class="bi bi-plus-lg me-2"></i>Создание проекта
+          {% endif %}
+        </h4>
+      </div>
+      <div class="card-body">
+        <form method="post">
+          {% csrf_token %}
+          {% for field in form %}
+          {% if field.name == 'team' %}
+          <div class="form-group mb-3">
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+            {% endif %}
+            {% if field.errors %}
+            <div class="invalid-feedback d-block">
+              {{ field.errors }}
+            </div>
+            {% endif %}
+          </div>
+          {% else %}
+          {{ field|as_crispy_field }}
+          {% endif %}
+          {% endfor %}
+          <div class="d-flex justify-content-between">
+            <a href="{% url 'projects:project_list' %}" class="btn btn-outline-secondary">
+              <i class="bi bi-arrow-left me-1"></i>Назад
+            </a>
+            <button type="submit" class="btn btn-primary">
+              {% if form.instance.pk %}
+              <i class="bi bi-check-lg me-1"></i>Сохранить
+              {% else %}
+              <i class="bi bi-plus-lg me-1"></i>Создать
+              {% endif %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .form-select[multiple] {
+    height: auto;
+    min-height: 100px;
+  }
+
+  .form-select[multiple] option {
+    padding: 8px;
+  }
+
+  .form-select[multiple] option:checked {
+    background-color: #0d6efd;
+    color: white;
+  }
+</style>
+{% endblock %}

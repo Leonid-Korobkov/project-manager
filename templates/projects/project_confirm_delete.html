@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Удаление проекта | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="mb-0 text-danger">
+          <i class="bi bi-exclamation-triangle me-2"></i>Удаление проекта
+        </h4>
+      </div>
+      <div class="card-body">
+        <p class="mb-0">Вы уверены, что хотите удалить проект "{{ object.title }}"?</p>
+        <p class="text-danger mb-4">
+          <small>
+            <i class="bi bi-exclamation-circle me-1"></i>
+            Это действие нельзя будет отменить. Все задачи проекта также будут удалены.
+          </small>
+        </p>
+        <form method="post">
+          {% csrf_token %}
+          <div class="d-flex justify-content-between">
+            <a href="{% url 'projects:project_detail' object.pk %}" class="btn btn-outline-secondary">
+              <i class="bi bi-arrow-left me-1"></i>Отмена
+            </a>
+            <button type="submit" class="btn btn-danger">
+              <i class="bi bi-trash me-1"></i>Удалить
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

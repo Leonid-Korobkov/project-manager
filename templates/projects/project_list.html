@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Проекты | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="mb-0">
+    <i class="bi bi-folder me-2"></i>Проекты
+  </h1>
+  <a href="{% url 'projects:project_create' %}" class="btn btn-primary">
+    <i class="bi bi-plus-lg me-1"></i>Создать проект
+  </a>
+</div>
+
+{% if projects %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+  {% for project in projects %}
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <h5 class="card-title mb-0">
+            <a href="{% url 'projects:project_detail' project.pk %}" class="text-decoration-none">
+              {{ project.title }}
+            </a>
+          </h5>
+          <span class="badge {% if project.status == 'completed' %}bg-success
+              {% elif project.status == 'in_progress' %}bg-primary
+              {% elif project.status == 'on_hold' %}bg-warning
+              {% elif project.status == 'cancelled' %}bg-danger
+              {% else %}bg-secondary{% endif %}">
+            {{ project.get_status_display }}
+          </span>
+        </div>
+
+        <p class="card-text text-muted small mb-3">
+          {{ project.description|truncatewords:30 }}
+        </p>
+
+        <div class="progress mb-3" style="height: 5px;">
+          <div class="progress-bar" role="progressbar" style="width: {{ project.progress }}%;"
+            aria-valuenow="{{ project.progress }}" aria-valuemin="0" aria-valuemax="100">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center small text-muted">
+          <span>
+            <i class="bi bi-check2-square me-1"></i>
+            {{ project.completed_task_count }}/{{ project.task_count }} задач
+          </span>
+          <span>
+            <i class="bi bi-people me-1"></i>
+            {{ project.team.count }} участников
+          </span>
+        </div>
+      </div>
+
+      <div class="card-footer bg-transparent">
+        <div class="d-flex justify-content-between align-items-center small">
+          <span class="text-muted">
+            <i class="bi bi-person me-1"></i>
+            {{ project.manager.get_full_name|default:project.manager.username }}
+          </span>
+          {% if project.end_date %}
+          <span class="text-muted">
+            <i class="bi bi-calendar me-1"></i>
+            До {{ project.end_date|date:"d.m.Y" }}
+          </span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="text-center py-5">
+  <i class="bi bi-folder2-open display-1 text-muted mb-3"></i>
+  <h4 class="text-muted">У вас пока нет проектов</h4>
+  <p class="text-muted mb-4">Создайте свой первый проект, чтобы начать работу</p>
+  <a href="{% url 'projects:project_create' %}" class="btn btn-primary">
+    <i class="bi bi-plus-lg me-1"></i>Создать проект
+  </a>
+</div>
+{% endif %}
+{% endblock %}

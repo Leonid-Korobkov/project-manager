@@ -1,0 +1,155 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "username": "manager",
+      "email": "manager@example.com",
+      "password": "manager123",
+      "first_name": "Иван",
+      "last_name": "Петров",
+      "is_active": true,
+      "is_staff": true,
+      "is_superuser": true,
+      "date_joined": "2024-03-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "username": "developer1",
+      "email": "dev1@example.com",
+      "password": "dev123",
+      "first_name": "Алексей",
+      "last_name": "Смирнов",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "date_joined": "2024-03-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "username": "developer2",
+      "email": "dev2@example.com",
+      "password": "dev123",
+      "first_name": "Мария",
+      "last_name": "Иванова",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "date_joined": "2024-03-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 1,
+    "fields": {
+      "title": "Разработка корпоративного портала",
+      "description": "Создание внутреннего портала для сотрудников компании с функциями документооборота и коммуникации",
+      "status": "in_progress",
+      "manager": 1,
+      "team": [2, 3],
+      "start_date": "2024-03-20",
+      "end_date": "2024-04-19",
+      "created_at": "2024-03-20T10:00:00Z",
+      "updated_at": "2024-03-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 2,
+    "fields": {
+      "title": "Модернизация сайта компании",
+      "description": "Обновление дизайна и функциональности корпоративного сайта",
+      "status": "not_started",
+      "manager": 1,
+      "team": [2],
+      "start_date": "2024-04-04",
+      "end_date": "2024-05-04",
+      "created_at": "2024-03-20T10:00:00Z",
+      "updated_at": "2024-03-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 3,
+    "fields": {
+      "title": "Внедрение CRM-системы",
+      "description": "Выбор и внедрение системы управления взаимоотношениями с клиентами",
+      "status": "on_hold",
+      "manager": 1,
+      "team": [3],
+      "start_date": "2024-02-19",
+      "end_date": "2024-05-19",
+      "created_at": "2024-03-20T10:00:00Z",
+      "updated_at": "2024-03-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 4,
+    "fields": {
+      "title": "Разработка мобильного приложения",
+      "description": "Создание мобильного приложения для iOS и Android",
+      "status": "completed",
+      "manager": 1,
+      "team": [2, 3],
+      "start_date": "2024-01-20",
+      "end_date": "2024-03-10",
+      "created_at": "2024-03-20T10:00:00Z",
+      "updated_at": "2024-03-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "projects.task",
+    "pk": 1,
+    "fields": {
+      "title": "Проектирование базы данных",
+      "description": "Разработка структуры базы данных для хранения информации о сотрудниках и документах",
+      "status": "in_progress",
+      "priority": "high",
+      "project": 1,
+      "assigned_to": 2,
+      "created_by": 1,
+      "due_date": "2024-03-27",
+      "created_at": "2024-03-20T10:00:00Z",
+      "updated_at": "2024-03-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "projects.task",
+    "pk": 2,
+    "fields": {
+      "title": "Разработка API",
+      "description": "Создание REST API для взаимодействия с базой данных",
+      "status": "todo",
+      "priority": "urgent",
+      "project": 1,
+      "assigned_to": 3,
+      "created_by": 1,
+      "due_date": "2024-04-03",
+      "created_at": "2024-03-20T10:00:00Z",
+      "updated_at": "2024-03-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "projects.task",
+    "pk": 3,
+    "fields": {
+      "title": "Тестирование безопасности",
+      "description": "Проведение аудита безопасности и тестирование на уязвимости",
+      "status": "review",
+      "priority": "medium",
+      "project": 1,
+      "assigned_to": 2,
+      "created_by": 1,
+      "due_date": "2024-04-10",
+      "created_at": "2024-03-20T10:00:00Z",
+      "updated_at": "2024-03-20T10:00:00Z"
+    }
+  }
+]
